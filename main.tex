@@ -1,0 +1,34 @@
+\documentclass[11pt]{book}
+    \title{\textbf{The Drift}}
+    \author{Dr. James Schloss (Leios)}
+    \date{}
+
+\input{content/aux/noteblock.tex}
+
+\makeatletter
+\newcommand{\chapterauthor}[1]{%
+  {\parindent0pt\vspace*{-25pt}%
+  \linespread{1.1}\large\scshape#1%
+  \par\nobreak\vspace*{35pt}}
+  \@afterheading%
+}
+\makeatother
+
+\begin{document}
+
+\maketitle
+
+\input{content/chapters/intro.tex}
+
+\newpage
+
+\chapter{Meddlings}
+\chapterauthor{Leios}
+
+\begin{noteblock}{yo}
+Arbitrary paragraph to use as an example to show how to use the noteblock type
+\end{noteblock}
+
+check this out!\footnote{what?}
+
+\end{document}

@@ -1,0 +1,44 @@
+% Note: There are small gaps between noteblocks and normal text
+
+\usepackage[strict]{changepage}
+\usepackage{tikz}
+\usepackage{environ}
+
+\NewEnviron{noteblock}[1]{
+    \checkoddpage
+    
+    \ifoddpage
+    
+    \addtocounter{footnote}{1}
+    \footnotetext[\value{footnote}]{#1}
+    \noindent \begin{tikzpicture}
+        \hspace{-0.4em} \node[draw] at (0.5\textwidth+1.5em,0) {\arabic{footnote}};
+        \node (TextBlock) {
+            \begin{minipage}{\textwidth}
+                \hspace{1em} \BODY 
+            \end{minipage}
+        };
+        \draw (TextBlock.east) -- (0.5\textwidth+0.9em,0);
+        \draw (TextBlock.south east) -- (TextBlock.north east);
+        \draw (TextBlock.south east) -- ([xshift=-1em]TextBlock.south east);
+        \draw (TextBlock.north east) -- ([xshift=-1em]TextBlock.north east);
+    \end{tikzpicture}
+    
+    \else
+    
+    \addtocounter{footnote}{1}
+    \footnotetext[\value{footnote}]{#1}
+    \noindent \begin{tikzpicture}
+        \hspace{-2em}\node[draw] at (-0.5\textwidth-1.5em,0) {\arabic{footnote}};
+        \node (TextBlock) {
+            \begin{minipage}{\textwidth}
+                \hspace{1em} \BODY 
+            \end{minipage}
+        };
+        \draw (TextBlock.west) -- (-0.5\textwidth-0.9em,0);
+        \draw (TextBlock.south west) -- (TextBlock.north west);
+        \draw (TextBlock.south west) -- ([xshift=1em]TextBlock.south west);
+        \draw (TextBlock.north west) -- ([xshift=1em]TextBlock.north west);
+    \end{tikzpicture}
+    \fi
+}
